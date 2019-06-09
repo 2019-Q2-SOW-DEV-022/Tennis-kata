@@ -6,11 +6,15 @@ public class TennisGame {
     private Player player1;
     private Player player2;
     private String gameScore;
+    private static final String HYPHEN = "-";
+    private static final String SAME_GAME_SCORE = "All";
+    private static final String LOVE = "Love";
+    private static final String FIFTEEN = "Fifteen";
 
     public TennisGame() {
         player1 = new Player("Player 1");
         player2 = new Player("Player 2");
-        gameScore = "Love-All";
+        gameScore = LOVE + HYPHEN + SAME_GAME_SCORE;
     }
 
     public Player getPlayer1() {
@@ -22,6 +26,9 @@ public class TennisGame {
     }
 
     public String getGameScore() {
+        if (player1.getPlayerScore() == 1) {
+            gameScore = FIFTEEN + HYPHEN + LOVE;
+        }
         return gameScore;
     }
 }
