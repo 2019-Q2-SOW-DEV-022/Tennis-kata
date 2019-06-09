@@ -26,10 +26,24 @@ public class TennisGame {
     }
 
     public String getGameScore() {
+        String player1GameScore = LOVE;
+        String player2GameScore = LOVE;
+
         if (player1.getPlayerScore() == 1) {
-            gameScore = FIFTEEN + HYPHEN + LOVE;
-            if (player1.getPlayerScore() == player2.getPlayerScore()) {
-                gameScore = FIFTEEN + HYPHEN + SAME_GAME_SCORE;
+            player1GameScore = FIFTEEN;
+        }
+
+        if (player2.getPlayerScore() == 1) {
+            player2GameScore = FIFTEEN;
+        }
+
+        gameScore = player1GameScore + HYPHEN + player2GameScore;
+
+        if (player1.getPlayerScore() == player2.getPlayerScore()) {
+            if (player1.getPlayerScore() == 0) {
+                gameScore = player1GameScore + HYPHEN + SAME_GAME_SCORE;
+            } else if (player1.getPlayerScore() == 1) {
+                gameScore = player2GameScore + HYPHEN + SAME_GAME_SCORE;
             }
         }
         return gameScore;
