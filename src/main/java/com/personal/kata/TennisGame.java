@@ -5,6 +5,7 @@ import com.personal.kata.model.Player;
 import java.util.stream.Stream;
 
 public class TennisGame {
+    private static final String DEUCE_GAME_SCORE = "Deuce";
     private Player player1;
     private Player player2;
     private String gameScore;
@@ -31,7 +32,11 @@ public class TennisGame {
 
     public String getGameScore() {
         if (hasScoresEqual()) {
-            gameScore = getScore(player1.getPlayerScore()) + HYPHEN + SAME_GAME_SCORE;
+            if (isPointEqualToForty()) {
+                gameScore = DEUCE_GAME_SCORE;
+            } else {
+                gameScore = getScore(player1.getPlayerScore()) + HYPHEN + SAME_GAME_SCORE;
+            }
         } else {
             gameScore = getScore(player1.getPlayerScore()) + HYPHEN + getScore(player2.getPlayerScore());
         }
@@ -40,6 +45,10 @@ public class TennisGame {
 
     private boolean hasScoresEqual() {
         return player1.getPlayerScore() == player2.getPlayerScore();
+    }
+
+    private boolean isPointEqualToForty() {
+        return player1.getPlayerScore() == Score.FORTY.point;
     }
 
     private enum Score {
