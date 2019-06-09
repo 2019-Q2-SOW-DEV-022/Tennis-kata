@@ -82,6 +82,16 @@ public class PlayTennisTest {
         assertConsoleLines("Game Starts Now!!", 3);
     }
 
+    @Test
+    @DisplayName("Given tennis application is launched When the Game Starts message is displayed Then the Playing instructions is displayed")
+    public void test_TennisApplicationLaunched_AfterPlayingInstructions_ShouldDisplayPlayingInstructions() {
+
+        inputLinesToConsole();
+        TennisGame tennisGame = PlayTennis.launch(printStream);
+
+        assertConsoleLines("Please enter who won this Ball, Press [1]: Rob / [2]: Bob Or Press [C] to stop playing", 4);
+    }
+
 
     private void assertConsoleLines(String content, int lineNumber) {
         String console = new String(outputStream.toByteArray());
