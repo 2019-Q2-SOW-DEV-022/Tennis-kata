@@ -17,6 +17,6 @@ public class Player {
     }
 
     public void scorePoint() {
-        playerScore = 1;
+        playerScore++;
     }
 }
