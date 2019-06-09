@@ -26,9 +26,7 @@ public class PlayTennisTest {
 
         PlayTennis.launch(printStream);
 
-        String console = new String(outputStream.toByteArray());
-        String[] consoleLines = console.split(System.getProperty("line.separator"));
-        assertEquals("Welcome! Lets Play Tennis", consoleLines[0]);
+        assertConsoleLines("Welcome! Lets Play Tennis", 0);
     }
 
     @Test
@@ -37,8 +35,12 @@ public class PlayTennisTest {
 
         PlayTennis.launch(printStream);
 
+        assertConsoleLines("Please enter Player One name: ", 1);
+    }
+
+    private void assertConsoleLines(String content, int lineNumber) {
         String console = new String(outputStream.toByteArray());
         String[] consoleLines = console.split(System.getProperty("line.separator"));
-        assertEquals("Please enter Player One name: ", consoleLines[1]);
+        assertEquals(content, consoleLines[lineNumber]);
     }
 }
