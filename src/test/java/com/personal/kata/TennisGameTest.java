@@ -100,7 +100,7 @@ public class TennisGameTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"1,0,Fifteen-Love", "0,1,Love-Fifteen", "2,0,Thirty-Love", "2,1,Thirty-Fifteen", "0,2,Love-Thirty", "1,2,Fifteen-Thirty"})
+    @CsvSource({"1,0,Fifteen-Love", "0,1,Love-Fifteen", "2,0,Thirty-Love", "2,1,Thirty-Fifteen", "0,2,Love-Thirty", "1,2,Fifteen-Thirty", "0,3,Love-Forty", "1,3,Fifteen-Forty", "2,3,Thirty-Forty", "3,0,Forty-Love", "3,1,Forty-Fifteen", "3,2,Forty-Thirty"})
     @DisplayName("Given a tennis game started When Player 1 and Player 2 score different points Then the game score contains the score of Player 1 followed by score of Player 2")
     public void test_GameInProgress_Player1AndPlayer2_ScoreSame_ShouldHaveGameScoreAll(int player1Score, int player2Score, String scoreCall) {
 
