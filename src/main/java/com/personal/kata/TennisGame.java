@@ -28,6 +28,9 @@ public class TennisGame {
     public String getGameScore() {
         if (player1.getPlayerScore() == 1) {
             gameScore = FIFTEEN + HYPHEN + LOVE;
+            if (player1.getPlayerScore() == player2.getPlayerScore()) {
+                gameScore = FIFTEEN + HYPHEN + SAME_GAME_SCORE;
+            }
         }
         return gameScore;
     }
