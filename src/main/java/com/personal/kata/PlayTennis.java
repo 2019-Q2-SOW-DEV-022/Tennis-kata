@@ -1,6 +1,7 @@
 package com.personal.kata;
 
 import java.io.PrintStream;
+import java.util.Scanner;
 
 public class PlayTennis {
 
@@ -10,8 +11,12 @@ public class PlayTennis {
     private PlayTennis() {
     }
 
-    public static void launch(PrintStream out) {
+    public static TennisGame launch(PrintStream out) {
         out.println(WELCOME_MESSAGE);
         out.println(PROMPT_FOR_PLAYER1_NAME);
+        Scanner inputFromConsole = new Scanner(System.in);
+        String player1Name = inputFromConsole.nextLine();
+        TennisGame tennisGame = new TennisGame(player1Name);
+        return tennisGame;
     }
 }
