@@ -16,15 +16,11 @@ public class TennisGame {
     private static final String SAME_GAME_SCORE = "All";
 
     public TennisGame() {
-        player1 = new Player("Player 1");
-        player2 = new Player("Player 2");
-        gameScore = Score.LOVE + HYPHEN + SAME_GAME_SCORE;
+        this("Player 1", "Player 2");
     }
 
     public TennisGame(String player1Name) {
-        player1 = new Player(player1Name);
-        player2 = new Player("Player 2");
-        gameScore = Score.LOVE + HYPHEN + SAME_GAME_SCORE;
+        this(player1Name, "Player 2");
     }
 
     public TennisGame(String player1Name, String player2Name) {
