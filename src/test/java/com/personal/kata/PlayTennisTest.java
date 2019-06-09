@@ -142,6 +142,19 @@ public class PlayTennisTest {
         assertConsoleLines("Game Over !!", 11);
     }
 
+    @Test
+    @DisplayName("Given tennis application is launched When the Playing instructions are displayed and either player Wins Then the Winner is announced and the program exits")
+    public void test_TennisApplicationLaunched_AfterPlayingInstructions_Player1Wins_ShouldDisplayScoreAndExit() {
+
+        String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + generateStrings(PLAYER1_INDICATOR, 4);
+        inputThisLineToConsole(consoleInput);
+
+        TennisGame tennisGame = PlayTennis.launch(printStream);
+
+        assertConsoleLines("Rob Wins", 11);
+        assertConsoleLines("Game Over !!", 12);
+    }
+
     private void assertConsoleLines(String content, int lineNumber) {
         String console = new String(outputStream.toByteArray());
         String[] consoleLines = console.split(NEW_LINE);
