@@ -16,6 +16,7 @@ public class PlayTennis {
     private static final String PLAYING_INSTRUCTIONS_PART2 = " / [" + PLAYER_2_INDICATOR + "]: ";
     private static final String PLAYING_INSTRUCTIONS_PART3 = " Or Press [" + GAME_CANCEL_INDICATOR + "] to stop playing";
     private static final String GAME_OVER_MESSAGE = "Game Over !!";
+    private static final String INVALID_INPUT_MESSAGE = "Please enter a valid Input !!";
 
     private PlayTennis() {
     }
@@ -40,6 +41,8 @@ public class PlayTennis {
                 out.println(tennisGame.getGameScore());
             } else if (input.equals(GAME_CANCEL_INDICATOR)) {
                 break;
+            } else {
+                out.println(INVALID_INPUT_MESSAGE);
             }
         } while (!tennisGame.getGameScore().contains("Wins"));
         out.println(GAME_OVER_MESSAGE);

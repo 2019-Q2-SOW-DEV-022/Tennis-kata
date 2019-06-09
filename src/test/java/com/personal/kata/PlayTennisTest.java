@@ -155,6 +155,17 @@ public class PlayTennisTest {
         assertConsoleLines("Game Over !!", 12);
     }
 
+    @Test
+    @DisplayName("Given tennis application is launched When the Playing instructions are displayed and Next key is pressed Then the entered key is validated to be one of acceptable keys")
+    public void test_TennisApplicationLaunched_AfterPlayingInstructions_ShouldValidateUserInput_AndDisplayInvalidInputIfInputInvalid() {
+        String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + "A" + NEW_LINE + GAME_CANCEL_INDICATOR;
+        inputThisLineToConsole(consoleInput);
+
+        TennisGame tennisGame = PlayTennis.launch(printStream);
+
+        assertConsoleLines("Please enter a valid Input !!", 5);
+    }
+
     private void assertConsoleLines(String content, int lineNumber) {
         String console = new String(outputStream.toByteArray());
         String[] consoleLines = console.split(NEW_LINE);
