@@ -166,6 +166,18 @@ public class PlayTennisTest {
         assertConsoleLines("Please enter a valid Input !!", 5);
     }
 
+    @Test
+    @DisplayName("Given a tennis application can be launched When the PlayTennis application is launched Then tennis application can be played")
+    public void test_TennisApplication_CanBeLaunched() {
+        inputLinesToConsole();
+        ByteArrayOutputStream console = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(console));
+
+        PlayTennis.main(new String[]{});
+
+        assert (console.toString().contains("Welcome! Lets Play Tennis"));
+    }
+
     private void assertConsoleLines(String content, int lineNumber) {
         String console = new String(outputStream.toByteArray());
         String[] consoleLines = console.split(NEW_LINE);

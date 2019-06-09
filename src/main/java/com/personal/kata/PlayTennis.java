@@ -18,9 +18,6 @@ public class PlayTennis {
     private static final String GAME_OVER_MESSAGE = "Game Over !!";
     private static final String INVALID_INPUT_MESSAGE = "Please enter a valid Input !!";
 
-    private PlayTennis() {
-    }
-
     public static TennisGame launch(PrintStream out) {
         out.println(WELCOME_MESSAGE);
         out.println(PROMPT_FOR_PLAYER1_NAME);
@@ -50,4 +47,7 @@ public class PlayTennis {
         return tennisGame;
     }
 
+    public static void main(String[] args) {
+        PlayTennis.launch(System.out);
+    }
 }

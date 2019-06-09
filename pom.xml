@@ -16,6 +16,7 @@
         <pitest-junit5-plugin.version>0.8</pitest-junit5-plugin.version>
         <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
+        <exec-maven-plugin.version>1.2.1</exec-maven-plugin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -51,6 +52,21 @@
                 <configuration>
                     <source>${java-version}</source>
                     <target>${java-version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>${exec-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>com.personal.kata.PlayTennis</mainClass>
                 </configuration>
             </plugin>
             <plugin>
