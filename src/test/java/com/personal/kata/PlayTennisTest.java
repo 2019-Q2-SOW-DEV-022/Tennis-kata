@@ -51,6 +51,16 @@ public class PlayTennisTest {
         assertEquals("Rob", tennisGame.getPlayer1().getPlayerName());
     }
 
+    @Test
+    @DisplayName("Given tennis application is launched When the player 1 name is entered Then it prompts to enter second player name ")
+    public void test_TennisApplicationIsLaunched_AfterPlayer1NameEntered_ShouldPromptForSecondPlayerName() {
+
+        inputLinesToConsole();
+        TennisGame tennisGame = PlayTennis.launch(printStream);
+
+        assertConsoleLines("Please enter Player Two name: ", 2);
+    }
+
 
     private void assertConsoleLines(String content, int lineNumber) {
         String console = new String(outputStream.toByteArray());
