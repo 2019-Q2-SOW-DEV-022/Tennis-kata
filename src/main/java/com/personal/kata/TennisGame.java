@@ -6,6 +6,9 @@ import java.util.stream.Stream;
 
 public class TennisGame {
     private static final String DEUCE_GAME_SCORE = "Deuce";
+    private static final int ONE_POINT = 1;
+    private static final String GAME_SCORE_ADVANTAGE = " Advantage";
+    private static final String GAME_SCORE_WINS = " Wins";
     private Player player1;
     private Player player2;
     private String gameScore;
@@ -37,8 +40,8 @@ public class TennisGame {
             } else {
                 gameScore = getScore(player1.getPlayerScore()) + HYPHEN + SAME_GAME_SCORE;
             }
-        } else if (isAnyPlayerCanWin() && (Math.abs(player1.getPlayerScore() - player2.getPlayerScore()) > 1)) {
-            gameScore = getTopPlayer().getPlayerName() + " Wins";
+        } else if (isAnyPlayerCanWin()) {
+            gameScore = isAnyPlayerLeadByOnePoint() ? getTopPlayerName() + GAME_SCORE_ADVANTAGE : getTopPlayerName() + GAME_SCORE_WINS;
         } else {
             gameScore = getScore(player1.getPlayerScore()) + HYPHEN + getScore(player2.getPlayerScore());
         }
@@ -57,8 +60,12 @@ public class TennisGame {
         return player1.getPlayerScore() == Score.FORTY.point;
     }
 
-    private Player getTopPlayer() {
-        return player1.getPlayerScore() > player2.getPlayerScore() ? player1 : player2;
+    private String getTopPlayerName() {
+        return player1.getPlayerScore() > player2.getPlayerScore() ? player1.getPlayerName() : player2.getPlayerName();
+    }
+
+    private boolean isAnyPlayerLeadByOnePoint() {
+        return ONE_POINT == Math.abs(player1.getPlayerScore() - player2.getPlayerScore());
     }
 
     private enum Score {

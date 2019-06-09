@@ -132,6 +132,19 @@ public class TennisGameTest {
         assertEquals(playerName + " Wins", tennisGame.getGameScore());
     }
 
+    @ParameterizedTest
+    @CsvSource({"6,5,Player 1", "5,6,Player 2", "7,8,Player 2", "4,5,Player 2", "4,3,Player 1"})
+    @DisplayName("Given a tennis game started When Player 1 and Player 2 score at least 3 points and is ahead of by 1 point Then the game score is Advantage Player")
+    public void test_GameInProgress_Player1AndPlayer2_ScoreAtLeast3Points_AndPlayerAheadBy1point_ShouldHaveGameScoreAdvantagePlayer(int player1Score, int player2Score, String playerName) {
+
+        scoreWinsByPlayer(tennisGame.getPlayer1(), player1Score);
+        scoreWinsByPlayer(tennisGame.getPlayer2(), player2Score);
+
+        assertEquals(playerName + " Advantage", tennisGame.getGameScore());
+    }
+
+
+
     private void scoreWinsByPlayer(Player player, int totalWins) {
         for (int ball = 1; ball <= totalWins; ball++) {
             player.scorePoint();
