@@ -19,10 +19,6 @@ public class TennisGame {
         this("Player 1", "Player 2");
     }
 
-    public TennisGame(String player1Name) {
-        this(player1Name, "Player 2");
-    }
-
     public TennisGame(String player1Name, String player2Name) {
         player1 = new Player(player1Name);
         player2 = new Player(player2Name);
