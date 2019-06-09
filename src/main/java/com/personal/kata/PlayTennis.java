@@ -18,7 +18,8 @@ public class PlayTennis {
         Scanner inputFromConsole = new Scanner(System.in);
         String player1Name = inputFromConsole.nextLine();
         out.println(PROMPT_FOR_PLAYER2_NAME);
-        TennisGame tennisGame = new TennisGame(player1Name);
+        String player2Name = inputFromConsole.nextLine();
+        TennisGame tennisGame = new TennisGame(player1Name, player2Name);
         return tennisGame;
     }
 }

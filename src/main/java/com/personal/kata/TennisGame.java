@@ -27,6 +27,12 @@ public class TennisGame {
         gameScore = Score.LOVE + HYPHEN + SAME_GAME_SCORE;
     }
 
+    public TennisGame(String player1Name, String player2Name) {
+        player1 = new Player(player1Name);
+        player2 = new Player(player2Name);
+        gameScore = Score.LOVE + HYPHEN + SAME_GAME_SCORE;
+    }
+
     private String getScore(int point) {
         return Stream.of(Score.values()).filter(scoreValue -> scoreValue.point == point).findFirst().map(score -> score.pointValue).orElse("");
     }

@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PlayTennisTest {
 
+    private static final String NEW_LINE = System.getProperty("line.separator");
     ByteArrayOutputStream outputStream;
     PrintStream printStream;
 
@@ -61,15 +62,25 @@ public class PlayTennisTest {
         assertConsoleLines("Please enter Player Two name: ", 2);
     }
 
+    @Test
+    @DisplayName("Given tennis application is launched When the prompt to enter Player two name is displayed and entered Then the entered player name is set as Player 2 name")
+    public void test_TennisApplicationLaunched_AfterPlayer2NamePrompt_ShouldAssignEntryToSecondPlayerName() {
+
+        inputLinesToConsole();
+        TennisGame tennisGame = PlayTennis.launch(printStream);
+
+        assertEquals("Bob", tennisGame.getPlayer2().getPlayerName());
+    }
+
 
     private void assertConsoleLines(String content, int lineNumber) {
         String console = new String(outputStream.toByteArray());
-        String[] consoleLines = console.split(System.getProperty("line.separator"));
+        String[] consoleLines = console.split(NEW_LINE);
         assertEquals(content, consoleLines[lineNumber]);
     }
 
     private void inputLinesToConsole() {
-        String consoleInput = "Rob" + System.getProperty("line.separator");
+        String consoleInput = "Rob" + NEW_LINE + "Bob";
         System.setIn(new ByteArrayInputStream(consoleInput.getBytes()));
     }
 }
