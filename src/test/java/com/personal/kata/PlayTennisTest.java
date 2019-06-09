@@ -123,6 +123,25 @@ public class PlayTennisTest {
         assertEquals(wins, tennisGame.getPlayer2().getPlayerScore());
     }
 
+    @Test
+    @DisplayName("Given tennis application is launched When the Playing instructions are displayed and either player keys is pressed Then the game score is displayed after every Round")
+    public void test_TennisApplicationLaunched_AfterPlayingInstructions_PlayerKeysIsEntered_ShouldDisplayScore() {
+
+        String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + generateStrings(PLAYER1_INDICATOR, 2) + NEW_LINE + generateStrings(PLAYER2_INDICATOR, 1) + NEW_LINE + GAME_CANCEL_INDICATOR;
+        inputThisLineToConsole(consoleInput);
+
+        TennisGame tennisGame = PlayTennis.launch(printStream);
+
+        assertConsoleLines("Please enter who won this Ball, Press [1]: Rob / [2]: Bob Or Press [C] to stop playing", 4);
+        assertConsoleLines("Fifteen-Love", 5);
+        assertConsoleLines("Please enter who won this Ball, Press [1]: Rob / [2]: Bob Or Press [C] to stop playing", 6);
+        assertConsoleLines("Thirty-Love", 7);
+        assertConsoleLines("Please enter who won this Ball, Press [1]: Rob / [2]: Bob Or Press [C] to stop playing", 8);
+        assertConsoleLines("Thirty-Fifteen", 9);
+        assertConsoleLines("Please enter who won this Ball, Press [1]: Rob / [2]: Bob Or Press [C] to stop playing", 10);
+        assertConsoleLines("Game Over !!", 11);
+    }
+
     private void assertConsoleLines(String content, int lineNumber) {
         String console = new String(outputStream.toByteArray());
         String[] consoleLines = console.split(NEW_LINE);
