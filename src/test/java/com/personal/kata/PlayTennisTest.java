@@ -1,8 +1,11 @@
 package com.personal.kata;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -13,6 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PlayTennisTest {
 
     private static final String NEW_LINE = System.getProperty("line.separator");
+    private static final String PLAYER1_INDICATOR = "1";
+    private static final String PLAYER2_INDICATOR = "2";
+    private static final String GAME_CANCEL_INDICATOR = "C";
     ByteArrayOutputStream outputStream;
     PrintStream printStream;
 
@@ -103,6 +109,19 @@ public class PlayTennisTest {
         assertConsoleLines("Game Over !!", 5);
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3})
+    @DisplayName("Given tennis application is launched When the Playing instructions are displayed and Player 1 player keys is pressed Then the player 1 score increases")
+    public void test_TennisApplicationLaunched_AfterPlayingInstructions_PlayerKeysIsEntered_ShouldIncreasePlayerScore(int wins) {
+
+        String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + generateStrings(PLAYER1_INDICATOR, wins) + NEW_LINE + GAME_CANCEL_INDICATOR;
+        inputThisLineToConsole(consoleInput);
+
+        TennisGame tennisGame = PlayTennis.launch(printStream);
+
+        assertEquals(wins, tennisGame.getPlayer1().getPlayerScore());
+    }
+
     private void assertConsoleLines(String content, int lineNumber) {
         String console = new String(outputStream.toByteArray());
         String[] consoleLines = console.split(NEW_LINE);
@@ -116,5 +135,9 @@ public class PlayTennisTest {
 
     private void inputThisLineToConsole(String consoleInput) {
         System.setIn(new ByteArrayInputStream(consoleInput.getBytes()));
+    }
+
+    private String generateStrings(String key, int times) {
+        return StringUtils.repeat(key, NEW_LINE, times);
     }
 }

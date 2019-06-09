@@ -15,6 +15,7 @@
         <pitest-maven.version>1.4.3</pitest-maven.version>
         <pitest-junit5-plugin.version>0.8</pitest-junit5-plugin.version>
         <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
+        <commons-lang3.version>3.8.1</commons-lang3.version>
     </properties>
     <dependencies>
         <dependency>
@@ -34,6 +35,11 @@
             <artifactId>junit-jupiter-params</artifactId>
             <version>${junit-jupiter-version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
         </dependency>
     </dependencies>
     <build>

@@ -29,11 +29,17 @@ public class PlayTennis {
         String player2Name = inputFromConsole.nextLine();
         out.println(GAME_STARTS_NOW_MESSAGE);
         TennisGame tennisGame = new TennisGame(player1Name, player2Name);
-        out.println(PLAYING_INSTRUCTIONS_PART1 + player1Name + PLAYING_INSTRUCTIONS_PART2 + player2Name + PLAYING_INSTRUCTIONS_PART3);
-        String input = inputFromConsole.nextLine().toUpperCase();
-        if (input.equals(GAME_CANCEL_INDICATOR)) {
-            out.println(GAME_OVER_MESSAGE);
+        while (inputFromConsole.hasNext()) {
+            out.println(PLAYING_INSTRUCTIONS_PART1 + player1Name + PLAYING_INSTRUCTIONS_PART2 + player2Name + PLAYING_INSTRUCTIONS_PART3);
+            String input = inputFromConsole.nextLine().toUpperCase();
+            if (input.equals(PLAYER_1_INDICATOR)) {
+                tennisGame.getPlayer1().scorePoint();
+            } else if (input.equals(GAME_CANCEL_INDICATOR)) {
+                out.println(GAME_OVER_MESSAGE);
+                break;
+            }
         }
+
         return tennisGame;
     }
 }
