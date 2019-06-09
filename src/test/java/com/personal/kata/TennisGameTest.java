@@ -121,6 +121,17 @@ public class TennisGameTest {
         assertEquals(DEUCE_GAME_SCORE, tennisGame.getGameScore());
     }
 
+    @ParameterizedTest
+    @CsvSource({"4,2,Player 1", "3,5,Player 2", "4,6,Player 2", "6,4,Player 1", "0,4,Player 2", "1,4,Player 2", "4,1,Player 1", "12,10,Player 1"})
+    @DisplayName("Given a tennis game started When Any Player has scored at least 4 points and is ahead by two points Then the game score is Player Wins")
+    public void test_GameInProgress_PlayerScoresAtLeast4Points_AndPlayerAheadByTwoPoints_ShouldHaveGameScorePlayerWins(int player1Score, int player2Score, String playerName) {
+
+        scoreWinsByPlayer(tennisGame.getPlayer1(), player1Score);
+        scoreWinsByPlayer(tennisGame.getPlayer2(), player2Score);
+
+        assertEquals(playerName + " Wins", tennisGame.getGameScore());
+    }
+
     private void scoreWinsByPlayer(Player player, int totalWins) {
         for (int ball = 1; ball <= totalWins; ball++) {
             player.scorePoint();

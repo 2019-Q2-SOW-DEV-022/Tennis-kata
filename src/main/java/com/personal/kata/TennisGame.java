@@ -37,6 +37,8 @@ public class TennisGame {
             } else {
                 gameScore = getScore(player1.getPlayerScore()) + HYPHEN + SAME_GAME_SCORE;
             }
+        } else if (isAnyPlayerCanWin() && (Math.abs(player1.getPlayerScore() - player2.getPlayerScore()) > 1)) {
+            gameScore = getTopPlayer().getPlayerName() + " Wins";
         } else {
             gameScore = getScore(player1.getPlayerScore()) + HYPHEN + getScore(player2.getPlayerScore());
         }
@@ -47,8 +49,16 @@ public class TennisGame {
         return player1.getPlayerScore() == player2.getPlayerScore();
     }
 
+    private boolean isAnyPlayerCanWin() {
+        return player1.getPlayerScore() > Score.FORTY.point || player2.getPlayerScore() > Score.FORTY.point;
+    }
+
     private boolean isPointEqualToForty() {
         return player1.getPlayerScore() == Score.FORTY.point;
+    }
+
+    private Player getTopPlayer() {
+        return player1.getPlayerScore() > player2.getPlayerScore() ? player1 : player2;
     }
 
     private enum Score {
