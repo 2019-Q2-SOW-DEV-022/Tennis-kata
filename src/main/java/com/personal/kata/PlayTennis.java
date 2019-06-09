@@ -15,6 +15,7 @@ public class PlayTennis {
     private static final String PLAYING_INSTRUCTIONS_PART1 = "Please enter who won this Ball, Press [" + PLAYER_1_INDICATOR + "]: ";
     private static final String PLAYING_INSTRUCTIONS_PART2 = " / [" + PLAYER_2_INDICATOR + "]: ";
     private static final String PLAYING_INSTRUCTIONS_PART3 = " Or Press [" + GAME_CANCEL_INDICATOR + "] to stop playing";
+    private static final String GAME_OVER_MESSAGE = "Game Over !!";
 
     private PlayTennis() {
     }
@@ -29,6 +30,10 @@ public class PlayTennis {
         out.println(GAME_STARTS_NOW_MESSAGE);
         TennisGame tennisGame = new TennisGame(player1Name, player2Name);
         out.println(PLAYING_INSTRUCTIONS_PART1 + player1Name + PLAYING_INSTRUCTIONS_PART2 + player2Name + PLAYING_INSTRUCTIONS_PART3);
+        String input = inputFromConsole.nextLine().toUpperCase();
+        if (input.equals(GAME_CANCEL_INDICATOR)) {
+            out.println(GAME_OVER_MESSAGE);
+        }
         return tennisGame;
     }
 }

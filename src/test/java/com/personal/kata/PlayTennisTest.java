@@ -92,6 +92,16 @@ public class PlayTennisTest {
         assertConsoleLines("Please enter who won this Ball, Press [1]: Rob / [2]: Bob Or Press [C] to stop playing", 4);
     }
 
+    @Test
+    @DisplayName("Given tennis application is launched When the Playing instructions are displayed and C is pressed Then the game terminates with Game over message")
+    public void test_TennisApplicationLaunched_AfterPlayingInstructions_KeyToCancelIsPressed_ShouldTerminateGame() {
+        String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + "C";
+
+        inputThisLineToConsole(consoleInput);
+        TennisGame tennisGame = PlayTennis.launch(printStream);
+
+        assertConsoleLines("Game Over !!", 5);
+    }
 
     private void assertConsoleLines(String content, int lineNumber) {
         String console = new String(outputStream.toByteArray());
@@ -100,7 +110,11 @@ public class PlayTennisTest {
     }
 
     private void inputLinesToConsole() {
-        String consoleInput = "Rob" + NEW_LINE + "Bob";
+        String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + "C";
+        inputThisLineToConsole(consoleInput);
+    }
+
+    private void inputThisLineToConsole(String consoleInput) {
         System.setIn(new ByteArrayInputStream(consoleInput.getBytes()));
     }
 }
