@@ -39,7 +39,7 @@ public class TennisGame {
 
     public String getGameScore() {
         if (hasScoresEqual()) {
-            gameScore = isPointEqualToForty() ? DEUCE_GAME_SCORE : getScore(player1.getPlayerScore()) + HYPHEN + SAME_GAME_SCORE;
+            gameScore = isPointGreaterOrEqualForty() ? DEUCE_GAME_SCORE : getScore(player1.getPlayerScore()) + HYPHEN + SAME_GAME_SCORE;
         } else if (isAnyPlayerCanWin()) {
             gameScore = isAnyPlayerLeadByOnePoint() ? getTopPlayerName() + GAME_SCORE_ADVANTAGE : getTopPlayerName() + GAME_SCORE_WINS;
         } else {
@@ -56,8 +56,8 @@ public class TennisGame {
         return player1.getPlayerScore() > Score.FORTY.point || player2.getPlayerScore() > Score.FORTY.point;
     }
 
-    private boolean isPointEqualToForty() {
-        return player1.getPlayerScore() == Score.FORTY.point;
+    private boolean isPointGreaterOrEqualForty() {
+        return player1.getPlayerScore() >= Score.FORTY.point;
     }
 
     private String getTopPlayerName() {

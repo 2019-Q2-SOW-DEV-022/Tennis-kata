@@ -121,6 +121,15 @@ public class TennisGameTest {
         assertEquals(DEUCE_GAME_SCORE, tennisGame.getGameScore());
     }
 
+    @Test
+    @DisplayName("Given a tennis game started When Player 1 and Player 2 score at least 3 points and each score same points Then the game score is Deuce")
+    public void test_GameInProgress_Player1AndPlayer2_ScoreAtLeast3Points_AndScoreSamePoints_ShouldHaveGameScoreDeuce() {
+        scoreWinsByPlayer(tennisGame.getPlayer1(), 5);
+        scoreWinsByPlayer(tennisGame.getPlayer2(), 5);
+
+        assertEquals(DEUCE_GAME_SCORE, tennisGame.getGameScore());
+    }
+
     @ParameterizedTest
     @CsvSource({"4,2,Player 1", "3,5,Player 2", "4,6,Player 2", "6,4,Player 1", "0,4,Player 2", "1,4,Player 2", "4,1,Player 1", "12,10,Player 1"})
     @DisplayName("Given a tennis game started When Any Player has scored at least 4 points and is ahead by two points Then the game score is Player Wins")
