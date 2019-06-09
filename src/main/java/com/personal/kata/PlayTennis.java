@@ -8,6 +8,7 @@ public class PlayTennis {
     private static final String WELCOME_MESSAGE = "Welcome! Lets Play Tennis";
     private static final String PROMPT_FOR_PLAYER1_NAME = "Please enter Player One name: ";
     private static final String PROMPT_FOR_PLAYER2_NAME = "Please enter Player Two name: ";
+    private static final String GAME_STARTS_NOW_MESSAGE = "Game Starts Now!!";
 
     private PlayTennis() {
     }
@@ -19,6 +20,7 @@ public class PlayTennis {
         String player1Name = inputFromConsole.nextLine();
         out.println(PROMPT_FOR_PLAYER2_NAME);
         String player2Name = inputFromConsole.nextLine();
+        out.println(GAME_STARTS_NOW_MESSAGE);
         TennisGame tennisGame = new TennisGame(player1Name, player2Name);
         return tennisGame;
     }
