@@ -89,9 +89,10 @@ public class TennisGameTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"0,Love", "1,Fifteen"})
+    @CsvSource({"0,Love", "1,Fifteen", "2,Thirty"})
     @DisplayName("Given a tennis game started When Player 1 and Player 2 scores same points Then the game score is followed by -All")
     public void test_GameInProgress_Player1AndPlayer2_ScoreSame_ShouldHaveGameScoreAll(int wins, String scoreCall) {
+
         scoreWinsByPlayer(tennisGame.getPlayer1(), wins);
         scoreWinsByPlayer(tennisGame.getPlayer2(), wins);
 
@@ -99,9 +100,10 @@ public class TennisGameTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"1,0,Fifteen-Love", "0,1,Love-Fifteen"})
+    @CsvSource({"1,0,Fifteen-Love", "0,1,Love-Fifteen", "2,0,Thirty-Love", "2,1,Thirty-Fifteen", "0,2,Love-Thirty", "1,2,Fifteen-Thirty"})
     @DisplayName("Given a tennis game started When Player 1 and Player 2 score different points Then the game score contains the score of Player 1 followed by score of Player 2")
     public void test_GameInProgress_Player1AndPlayer2_ScoreSame_ShouldHaveGameScoreAll(int player1Score, int player2Score, String scoreCall) {
+
         scoreWinsByPlayer(tennisGame.getPlayer1(), player1Score);
         scoreWinsByPlayer(tennisGame.getPlayer2(), player2Score);
 
