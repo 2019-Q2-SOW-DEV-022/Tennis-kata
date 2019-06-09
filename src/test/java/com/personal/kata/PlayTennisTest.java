@@ -111,15 +111,16 @@ public class PlayTennisTest {
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
-    @DisplayName("Given tennis application is launched When the Playing instructions are displayed and Player 1 player keys is pressed Then the player 1 score increases")
+    @DisplayName("Given tennis application is launched When the Playing instructions are displayed and either player keys is pressed Then the player score increases")
     public void test_TennisApplicationLaunched_AfterPlayingInstructions_PlayerKeysIsEntered_ShouldIncreasePlayerScore(int wins) {
 
-        String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + generateStrings(PLAYER1_INDICATOR, wins) + NEW_LINE + GAME_CANCEL_INDICATOR;
+        String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + generateStrings(PLAYER1_INDICATOR, wins) + NEW_LINE + generateStrings(PLAYER2_INDICATOR, wins) + NEW_LINE + GAME_CANCEL_INDICATOR;
         inputThisLineToConsole(consoleInput);
 
         TennisGame tennisGame = PlayTennis.launch(printStream);
 
         assertEquals(wins, tennisGame.getPlayer1().getPlayerScore());
+        assertEquals(wins, tennisGame.getPlayer2().getPlayerScore());
     }
 
     private void assertConsoleLines(String content, int lineNumber) {

@@ -34,6 +34,8 @@ public class PlayTennis {
             String input = inputFromConsole.nextLine().toUpperCase();
             if (input.equals(PLAYER_1_INDICATOR)) {
                 tennisGame.getPlayer1().scorePoint();
+            } else if (input.equals(PLAYER_2_INDICATOR)) {
+                tennisGame.getPlayer2().scorePoint();
             } else if (input.equals(GAME_CANCEL_INDICATOR)) {
                 out.println(GAME_OVER_MESSAGE);
                 break;
