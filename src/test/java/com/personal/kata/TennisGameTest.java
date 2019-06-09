@@ -4,11 +4,14 @@ import com.personal.kata.model.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TennisGameTest {
 
+    private static final String ALL = "-All";
     TennisGame tennisGame;
 
     @BeforeEach
@@ -83,6 +86,26 @@ public class TennisGameTest {
         scoreWinsByPlayer(tennisGame.getPlayer2(), 1);
 
         assertEquals("Love-Fifteen", tennisGame.getGameScore());
+    }
+
+    @ParameterizedTest
+    @CsvSource({"0,Love", "1,Fifteen"})
+    @DisplayName("Given a tennis game started When Player 1 and Player 2 scores same points Then the game score is followed by -All")
+    public void test_GameInProgress_Player1AndPlayer2_ScoreSame_ShouldHaveGameScoreAll(int wins, String scoreCall) {
+        scoreWinsByPlayer(tennisGame.getPlayer1(), wins);
+        scoreWinsByPlayer(tennisGame.getPlayer2(), wins);
+
+        assertEquals(scoreCall + ALL, tennisGame.getGameScore());
+    }
+
+    @ParameterizedTest
+    @CsvSource({"1,0,Fifteen-Love", "0,1,Love-Fifteen"})
+    @DisplayName("Given a tennis game started When Player 1 and Player 2 score different points Then the game score contains the score of Player 1 followed by score of Player 2")
+    public void test_GameInProgress_Player1AndPlayer2_ScoreSame_ShouldHaveGameScoreAll(int player1Score, int player2Score, String scoreCall) {
+        scoreWinsByPlayer(tennisGame.getPlayer1(), player1Score);
+        scoreWinsByPlayer(tennisGame.getPlayer2(), player2Score);
+
+        assertEquals(scoreCall, tennisGame.getGameScore());
     }
 
     private void scoreWinsByPlayer(Player player, int totalWins) {
