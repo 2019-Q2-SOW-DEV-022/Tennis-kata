@@ -9,5 +9,6 @@ public class PlayTennis {
 
     public static void launch(PrintStream out) {
         out.println("Welcome! Lets Play Tennis");
+        out.println("Please enter Player One name: ");
     }
 }

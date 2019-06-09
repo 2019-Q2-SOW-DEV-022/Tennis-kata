@@ -30,4 +30,15 @@ public class PlayTennisTest {
         String[] consoleLines = console.split(System.getProperty("line.separator"));
         assertEquals("Welcome! Lets Play Tennis", consoleLines[0]);
     }
+
+    @Test
+    @DisplayName("Given tennis application is available When the tennis application is launched Then after the welcome message it prompts to enter first player name ")
+    public void test_TennisApplicationIsLaunched_AfterWelcomeMessage_ShouldPromptForFirstPlayerName() {
+
+        PlayTennis.launch(printStream);
+
+        String console = new String(outputStream.toByteArray());
+        String[] consoleLines = console.split(System.getProperty("line.separator"));
+        assertEquals("Please enter Player One name: ", consoleLines[1]);
+    }
 }
