@@ -175,7 +175,13 @@ public class PlayTennisTest {
 
         PlayTennis.main(new String[]{});
 
-        assert (console.toString().contains("Welcome! Lets Play Tennis"));
+        String[] consoleLines = console.toString().split(NEW_LINE);
+        assertEquals("Welcome! Lets Play Tennis", consoleLines[0]);
+        assertEquals("Please enter Player One name: ", consoleLines[1]);
+        assertEquals("Please enter Player Two name: ", consoleLines[2]);
+        assertEquals("Game Starts Now!!", consoleLines[3]);
+        assertEquals("Please enter who won this Ball, Press [1]: Rob / [2]: Bob Or Press [C] to stop playing", consoleLines[4]);
+        assertEquals("Game Over !!", consoleLines[5]);
     }
 
     private void assertConsoleLines(String content, int lineNumber) {
