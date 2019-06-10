@@ -50,7 +50,7 @@ Application uses pitest dependency to check code coverage and mutation testing c
 
 Application uses JaCoCo Maven plugin to generate code coverage report
 1. Open the command prompt / terminal from project directory 
-2. Run `mvn clean test`
+2. Run `mvn jacoco:report`
 3. Go to target -> site -> jacoco -> index.html
 
 
