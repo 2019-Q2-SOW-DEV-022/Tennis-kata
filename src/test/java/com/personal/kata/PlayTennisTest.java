@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.ByteArrayInputStream;
@@ -19,6 +20,13 @@ public class PlayTennisTest {
     private static final String PLAYER1_INDICATOR = "1";
     private static final String PLAYER2_INDICATOR = "2";
     private static final String GAME_CANCEL_INDICATOR = "C";
+    private static final String WELCOME_MESSAGE = "Welcome! Lets Play Tennis";
+    private static final String PROMPT_FOR_PLAYER1_NAME = "Please enter Player One name: ";
+    private static final String PROMPT_FOR_PLAYER2_NAME = "Please enter Player Two name: ";
+    private static final String GAME_STARTS_NOW_MESSAGE = "Game Starts Now!!";
+    private static final String GAME_OVER_MESSAGE = "Game Over !!";
+    private static final String CONSOLE_INPUT_MESSAGES = "Rob" + NEW_LINE + "Bob" + NEW_LINE + "C";
+    private static final String PLAYING_INSTRUCTIONS = "Please enter who won this Ball, Press [1]: Rob / [2]: Bob Or Press [C] to stop playing";
     ByteArrayOutputStream outputStream;
     PrintStream printStream;
 
@@ -28,24 +36,13 @@ public class PlayTennisTest {
         printStream = new PrintStream(outputStream);
     }
 
-    @Test
-    @DisplayName("Given tennis application is available When the tennis application is launched Then a welcome message is displayed")
-    public void test_TennisApplicationIsLaunched_ShouldDisplayWelcomeMessage() {
-
+    @ParameterizedTest
+    @CsvSource(value = {"0-" + WELCOME_MESSAGE, "1-" + PROMPT_FOR_PLAYER1_NAME, "2-" + PROMPT_FOR_PLAYER2_NAME, "3-" + GAME_STARTS_NOW_MESSAGE, "4-" + PLAYING_INSTRUCTIONS, "5-" + GAME_OVER_MESSAGE}, delimiter = '-')
+    public void test_TennisApplicationLaunched_DisplayInstructions(int line, String consoleOutput) {
         inputLinesToConsole();
-        new PlayTennis().launch(printStream);
+        TennisGame tennisGame = new PlayTennis().launch(printStream);
 
-        assertConsoleLines("Welcome! Lets Play Tennis", 0);
-    }
-
-    @Test
-    @DisplayName("Given tennis application is available When the tennis application is launched Then after the welcome message it prompts to enter first player name ")
-    public void test_TennisApplicationIsLaunched_AfterWelcomeMessage_ShouldPromptForFirstPlayerName() {
-
-        inputLinesToConsole();
-        new PlayTennis().launch(printStream);
-
-        assertConsoleLines("Please enter Player One name: ", 1);
+        assertConsoleLines(consoleOutput, line);
     }
 
     @Test
@@ -59,16 +56,6 @@ public class PlayTennisTest {
     }
 
     @Test
-    @DisplayName("Given tennis application is launched When the player 1 name is entered Then it prompts to enter second player name ")
-    public void test_TennisApplicationIsLaunched_AfterPlayer1NameEntered_ShouldPromptForSecondPlayerName() {
-
-        inputLinesToConsole();
-        TennisGame tennisGame = new PlayTennis().launch(printStream);
-
-        assertConsoleLines("Please enter Player Two name: ", 2);
-    }
-
-    @Test
     @DisplayName("Given tennis application is launched When the prompt to enter Player two name is displayed and entered Then the entered player name is set as Player 2 name")
     public void test_TennisApplicationLaunched_AfterPlayer2NamePrompt_ShouldAssignEntryToSecondPlayerName() {
 
@@ -76,37 +63,6 @@ public class PlayTennisTest {
         TennisGame tennisGame = new PlayTennis().launch(printStream);
 
         assertEquals("Bob", tennisGame.getPlayer2().getPlayerName());
-    }
-
-    @Test
-    @DisplayName("Given tennis application is launched When the player names are entered Then the Game Starts message is displayed")
-    public void test_TennisApplicationLaunched_AfterPlayer2NameEntered_ShouldDisplayGameStartsMessage() {
-
-        inputLinesToConsole();
-        TennisGame tennisGame = new PlayTennis().launch(printStream);
-
-        assertConsoleLines("Game Starts Now!!", 3);
-    }
-
-    @Test
-    @DisplayName("Given tennis application is launched When the Game Starts message is displayed Then the Playing instructions is displayed")
-    public void test_TennisApplicationLaunched_AfterPlayingInstructions_ShouldDisplayPlayingInstructions() {
-
-        inputLinesToConsole();
-        TennisGame tennisGame = new PlayTennis().launch(printStream);
-
-        assertConsoleLines("Please enter who won this Ball, Press [1]: Rob / [2]: Bob Or Press [C] to stop playing", 4);
-    }
-
-    @Test
-    @DisplayName("Given tennis application is launched When the Playing instructions are displayed and C is pressed Then the game terminates with Game over message")
-    public void test_TennisApplicationLaunched_AfterPlayingInstructions_KeyToCancelIsPressed_ShouldTerminateGame() {
-        String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + "C";
-
-        inputThisLineToConsole(consoleInput);
-        TennisGame tennisGame = new PlayTennis().launch(printStream);
-
-        assertConsoleLines("Game Over !!", 5);
     }
 
     @ParameterizedTest
@@ -176,23 +132,17 @@ public class PlayTennisTest {
         new PlayTennis().main(new String[]{});
 
         String[] consoleLines = console.toString().split(NEW_LINE);
-        assertEquals("Welcome! Lets Play Tennis", consoleLines[0]);
-        assertEquals("Please enter Player One name: ", consoleLines[1]);
-        assertEquals("Please enter Player Two name: ", consoleLines[2]);
-        assertEquals("Game Starts Now!!", consoleLines[3]);
-        assertEquals("Please enter who won this Ball, Press [1]: Rob / [2]: Bob Or Press [C] to stop playing", consoleLines[4]);
-        assertEquals("Game Over !!", consoleLines[5]);
+        assertEquals(WELCOME_MESSAGE, consoleLines[0]);
     }
 
     private void assertConsoleLines(String content, int lineNumber) {
         String console = new String(outputStream.toByteArray());
         String[] consoleLines = console.split(NEW_LINE);
-        assertEquals(content, consoleLines[lineNumber]);
+        assertEquals(content, consoleLines[lineNumber].trim());
     }
 
     private void inputLinesToConsole() {
-        String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + "C";
-        inputThisLineToConsole(consoleInput);
+        inputThisLineToConsole(CONSOLE_INPUT_MESSAGES);
     }
 
     private void inputThisLineToConsole(String consoleInput) {
