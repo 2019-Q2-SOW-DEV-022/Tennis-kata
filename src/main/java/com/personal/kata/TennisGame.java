@@ -25,10 +25,6 @@ public class TennisGame {
         gameScore = Score.LOVE + HYPHEN + SAME_GAME_SCORE;
     }
 
-    private String getScore(int point) {
-        return Stream.of(Score.values()).filter(scoreValue -> scoreValue.point == point).findFirst().map(score -> score.pointValue).orElse("");
-    }
-
     public Player getPlayer1() {
         return player1;
     }
@@ -39,11 +35,11 @@ public class TennisGame {
 
     public String getGameScore() {
         if (hasScoresEqual()) {
-            gameScore = isPointGreaterOrEqualForty() ? DEUCE_GAME_SCORE : getScore(player1.getPlayerScore()) + HYPHEN + SAME_GAME_SCORE;
+            gameScore = isPointGreaterOrEqualForty() ? DEUCE_GAME_SCORE : Score.getScore(player1.getPlayerScore()) + HYPHEN + SAME_GAME_SCORE;
         } else if (isAnyPlayerCanWin()) {
             gameScore = isAnyPlayerLeadByOnePoint() ? getTopPlayerName() + GAME_SCORE_ADVANTAGE : getTopPlayerName() + GAME_SCORE_WINS;
         } else {
-            gameScore = getScore(player1.getPlayerScore()) + HYPHEN + getScore(player2.getPlayerScore());
+            gameScore = Score.getScore(player1.getPlayerScore()) + HYPHEN + Score.getScore(player2.getPlayerScore());
         }
         return gameScore;
     }
@@ -80,6 +76,10 @@ public class TennisGame {
         Score(int point, String pointValue) {
             this.point = point;
             this.pointValue = pointValue;
+        }
+
+        private static String getScore(int point) {
+            return Stream.of(Score.values()).filter(scoreValue -> scoreValue.point == point).findFirst().map(score -> score.pointValue).orElse("");
         }
     }
 }
