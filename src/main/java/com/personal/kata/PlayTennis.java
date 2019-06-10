@@ -19,7 +19,11 @@ public class PlayTennis {
     private static final String INVALID_INPUT_MESSAGE = "Please enter a valid Input !!";
     private static final String WINS = "Wins";
 
-    public static TennisGame launch(PrintStream out) {
+    public static void main(String[] args) {
+        new PlayTennis().launch(System.out);
+    }
+
+    public TennisGame launch(PrintStream out) {
         out.println(WELCOME_MESSAGE);
         out.println(PROMPT_FOR_PLAYER1_NAME);
         Scanner inputFromConsole = new Scanner(System.in);
@@ -45,9 +49,5 @@ public class PlayTennis {
         } while (!tennisGame.getGameScore().contains(WINS));
         out.println(GAME_OVER_MESSAGE);
         return tennisGame;
-    }
-
-    public static void main(String[] args) {
-        PlayTennis.launch(System.out);
     }
 }

@@ -33,7 +33,7 @@ public class PlayTennisTest {
     public void test_TennisApplicationIsLaunched_ShouldDisplayWelcomeMessage() {
 
         inputLinesToConsole();
-        PlayTennis.launch(printStream);
+        new PlayTennis().launch(printStream);
 
         assertConsoleLines("Welcome! Lets Play Tennis", 0);
     }
@@ -43,7 +43,7 @@ public class PlayTennisTest {
     public void test_TennisApplicationIsLaunched_AfterWelcomeMessage_ShouldPromptForFirstPlayerName() {
 
         inputLinesToConsole();
-        PlayTennis.launch(printStream);
+        new PlayTennis().launch(printStream);
 
         assertConsoleLines("Please enter Player One name: ", 1);
     }
@@ -53,7 +53,7 @@ public class PlayTennisTest {
     public void test_TennisApplicationLaunched_AfterPlayer1NamePrompt_ShouldAssignEntryToFirstPlayerName() {
 
         inputLinesToConsole();
-        TennisGame tennisGame = PlayTennis.launch(printStream);
+        TennisGame tennisGame = new PlayTennis().launch(printStream);
 
         assertEquals("Rob", tennisGame.getPlayer1().getPlayerName());
     }
@@ -63,7 +63,7 @@ public class PlayTennisTest {
     public void test_TennisApplicationIsLaunched_AfterPlayer1NameEntered_ShouldPromptForSecondPlayerName() {
 
         inputLinesToConsole();
-        TennisGame tennisGame = PlayTennis.launch(printStream);
+        TennisGame tennisGame = new PlayTennis().launch(printStream);
 
         assertConsoleLines("Please enter Player Two name: ", 2);
     }
@@ -73,7 +73,7 @@ public class PlayTennisTest {
     public void test_TennisApplicationLaunched_AfterPlayer2NamePrompt_ShouldAssignEntryToSecondPlayerName() {
 
         inputLinesToConsole();
-        TennisGame tennisGame = PlayTennis.launch(printStream);
+        TennisGame tennisGame = new PlayTennis().launch(printStream);
 
         assertEquals("Bob", tennisGame.getPlayer2().getPlayerName());
     }
@@ -83,7 +83,7 @@ public class PlayTennisTest {
     public void test_TennisApplicationLaunched_AfterPlayer2NameEntered_ShouldDisplayGameStartsMessage() {
 
         inputLinesToConsole();
-        TennisGame tennisGame = PlayTennis.launch(printStream);
+        TennisGame tennisGame = new PlayTennis().launch(printStream);
 
         assertConsoleLines("Game Starts Now!!", 3);
     }
@@ -93,7 +93,7 @@ public class PlayTennisTest {
     public void test_TennisApplicationLaunched_AfterPlayingInstructions_ShouldDisplayPlayingInstructions() {
 
         inputLinesToConsole();
-        TennisGame tennisGame = PlayTennis.launch(printStream);
+        TennisGame tennisGame = new PlayTennis().launch(printStream);
 
         assertConsoleLines("Please enter who won this Ball, Press [1]: Rob / [2]: Bob Or Press [C] to stop playing", 4);
     }
@@ -104,7 +104,7 @@ public class PlayTennisTest {
         String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + "C";
 
         inputThisLineToConsole(consoleInput);
-        TennisGame tennisGame = PlayTennis.launch(printStream);
+        TennisGame tennisGame = new PlayTennis().launch(printStream);
 
         assertConsoleLines("Game Over !!", 5);
     }
@@ -117,7 +117,7 @@ public class PlayTennisTest {
         String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + generateStrings(PLAYER1_INDICATOR, wins) + NEW_LINE + generateStrings(PLAYER2_INDICATOR, wins) + NEW_LINE + GAME_CANCEL_INDICATOR;
         inputThisLineToConsole(consoleInput);
 
-        TennisGame tennisGame = PlayTennis.launch(printStream);
+        TennisGame tennisGame = new PlayTennis().launch(printStream);
 
         assertEquals(wins, tennisGame.getPlayer1().getPlayerScore());
         assertEquals(wins, tennisGame.getPlayer2().getPlayerScore());
@@ -130,7 +130,7 @@ public class PlayTennisTest {
         String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + generateStrings(PLAYER1_INDICATOR, 2) + NEW_LINE + generateStrings(PLAYER2_INDICATOR, 1) + NEW_LINE + GAME_CANCEL_INDICATOR;
         inputThisLineToConsole(consoleInput);
 
-        TennisGame tennisGame = PlayTennis.launch(printStream);
+        TennisGame tennisGame = new PlayTennis().launch(printStream);
 
         assertConsoleLines("Please enter who won this Ball, Press [1]: Rob / [2]: Bob Or Press [C] to stop playing", 4);
         assertConsoleLines("Fifteen-Love", 5);
@@ -149,7 +149,7 @@ public class PlayTennisTest {
         String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + generateStrings(PLAYER1_INDICATOR, 4);
         inputThisLineToConsole(consoleInput);
 
-        TennisGame tennisGame = PlayTennis.launch(printStream);
+        TennisGame tennisGame = new PlayTennis().launch(printStream);
 
         assertConsoleLines("Rob Wins", 11);
         assertConsoleLines("Game Over !!", 12);
@@ -161,7 +161,7 @@ public class PlayTennisTest {
         String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + "A" + NEW_LINE + GAME_CANCEL_INDICATOR;
         inputThisLineToConsole(consoleInput);
 
-        TennisGame tennisGame = PlayTennis.launch(printStream);
+        TennisGame tennisGame = new PlayTennis().launch(printStream);
 
         assertConsoleLines("Please enter a valid Input !!", 5);
     }
@@ -173,7 +173,7 @@ public class PlayTennisTest {
         ByteArrayOutputStream console = new ByteArrayOutputStream();
         System.setOut(new PrintStream(console));
 
-        PlayTennis.main(new String[]{});
+        new PlayTennis().main(new String[]{});
 
         String[] consoleLines = console.toString().split(NEW_LINE);
         assertEquals("Welcome! Lets Play Tennis", consoleLines[0]);
