@@ -15,7 +15,7 @@
         <pitest-maven.version>1.4.3</pitest-maven.version>
         <pitest-junit5-plugin.version>0.8</pitest-junit5-plugin.version>
         <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
-        <commons-lang3.version>3.8.1</commons-lang3.version>
+        <commons-lang3.version>3.18.0</commons-lang3.version>
         <exec-maven-plugin.version>1.2.1</exec-maven-plugin.version>
     </properties>
     <dependencies>
